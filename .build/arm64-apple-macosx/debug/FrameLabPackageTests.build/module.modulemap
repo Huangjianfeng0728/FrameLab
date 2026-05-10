@@ -1,0 +1,4 @@
+module FrameLabPackageTests {
+    header "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/FrameLabPackageTests.build/FrameLabPackageTests-Swift.h"
+    requires objc
+}

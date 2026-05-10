@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/master.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.derived/runner.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/runner.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/runner.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/runner~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/runner.swiftdeps"
+  }
+}

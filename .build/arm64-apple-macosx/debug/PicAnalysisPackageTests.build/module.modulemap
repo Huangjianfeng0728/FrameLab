@@ -1,0 +1,4 @@
+module PicAnalysisPackageTests {
+    header "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisPackageTests.build/PicAnalysisPackageTests-Swift.h"
+    requires objc
+}

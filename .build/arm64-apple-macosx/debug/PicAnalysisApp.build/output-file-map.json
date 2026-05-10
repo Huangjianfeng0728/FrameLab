@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/master.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ColorAnalysis.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorAnalysis.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorAnalysis.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorAnalysis~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorAnalysis.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ColorWheelView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorWheelView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorWheelView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorWheelView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ColorWheelView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ContentView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ContentView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ContentView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ContentView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ContentView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ExportAnalysisView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ExportAnalysisView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ExportAnalysisView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ExportAnalysisView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ExportAnalysisView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/Exporter.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/Exporter.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/Exporter.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/Exporter~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/Exporter.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/HistogramPanel.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/HistogramPanel.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/HistogramPanel.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/HistogramPanel~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/HistogramPanel.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ImageLoader.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ImageLoader.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ImageLoader.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ImageLoader~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ImageLoader.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/KeyboardEventView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/KeyboardEventView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/KeyboardEventView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/KeyboardEventView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/KeyboardEventView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoAnalysisDocument.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoAnalysisDocument.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoAnalysisDocument.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoAnalysisDocument~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoAnalysisDocument.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoCanvasView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoCanvasView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoCanvasView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoCanvasView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoCanvasView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoListView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoListView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoListView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoListView.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PicAnalysisApp.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ProjectPersistence.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ProjectPersistence.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ProjectPersistence.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ProjectPersistence~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ProjectPersistence.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swiftdeps"
+  }
+}

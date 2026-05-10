@@ -1,0 +1,23 @@
+{
+  "": {
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/master.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/AnalysisViewModelTests.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ColorAnalysisTests.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ColorAnalysisTests.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ColorAnalysisTests.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ColorAnalysisTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ColorAnalysisTests.swiftdeps"
+  },
+  "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ImageLoaderTests.swift": {
+    "dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.d",
+    "object": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.swift.o",
+    "swiftmodule": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.swiftdeps"
+  }
+}
