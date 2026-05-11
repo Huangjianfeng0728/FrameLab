@@ -8,6 +8,10 @@ struct PersistedProject: Codable {
 struct PersistedPhoto: Codable {
     var id: UUID
     var path: String
+    var bookmarkData: Data?
+    var noteFolderPath: String?
+    var noteFolderBookmarkData: Data?
+    var noteFileName: String?
     var points: [PersistedSamplePoint]
 }
 
@@ -32,6 +36,10 @@ enum ProjectPersistence {
                 PersistedPhoto(
                     id: document.id,
                     path: document.url.path,
+                    bookmarkData: document.bookmarkData,
+                    noteFolderPath: document.noteFolderPath,
+                    noteFolderBookmarkData: document.noteFolderBookmarkData,
+                    noteFileName: document.noteFileName,
                     points: document.samplePoints.map { point in
                         PersistedSamplePoint(
                             id: point.id,
@@ -58,7 +66,16 @@ enum ProjectPersistence {
         }
 
         let documents = project.photos.compactMap { persistedPhoto -> PhotoAnalysisDocument? in
-            let url = URL(fileURLWithPath: persistedPhoto.path)
+            let resolvedPhoto = SecurityScopedResource.resolve(
+                bookmarkData: persistedPhoto.bookmarkData,
+                fallbackPath: persistedPhoto.path,
+                isDirectory: false
+            )
+            let url = resolvedPhoto.url
+            defer {
+                resolvedPhoto.stopAccessing()
+            }
+
             guard let loaded = try? ImageLoader.loadImageAndPixels(from: url) else {
                 return nil
             }
@@ -67,7 +84,11 @@ enum ProjectPersistence {
                 url: url,
                 image: loaded.image,
                 pixelBuffer: loaded.pixelBuffer,
-                defaultRadius: defaultRadius
+                defaultRadius: defaultRadius,
+                bookmarkData: persistedPhoto.bookmarkData,
+                noteFolderPath: persistedPhoto.noteFolderPath,
+                noteFolderBookmarkData: persistedPhoto.noteFolderBookmarkData,
+                noteFileName: persistedPhoto.noteFileName
             )
             document.samplePoints = persistedPhoto.points.map { persistedPoint in
                 let radius = SamplingRadius(rawValue: persistedPoint.radius) ?? defaultRadius

@@ -13,6 +13,8 @@ The app currently supports batch photo import, point-based color sampling, HSL a
 - Choose sampling radius: single pixel, 3x3, 5x5, or 9x9.
 - Show a pixel magnifier while dragging a sampling point, including the exact pixels used for sampling.
 - Display a tone histogram for the whole image.
+- Write per-photo Markdown notes while viewing images.
+- Save notes into a user-selected Obsidian folder, one `.md` file per photo.
 - Use arrow keys to switch between photos.
 - Enter immersive viewing mode, with optional sampling overlay and enlarged sampling details.
 - Export an analysis image containing the photo, sampling markers, color data, Color Wheel, and histogram.
@@ -27,6 +29,12 @@ FrameLab is designed for learning photography through close observation. Instead
 - How the overall tone distribution supports the look of the photo.
 
 The long-term goal is to grow FrameLab into an all-in-one photo study toolbox.
+
+## Obsidian Notes
+
+When importing a batch of photos, FrameLab asks for the Obsidian folder where notes for that batch should be saved. Each photo gets its own Markdown file based on the photo filename, such as `IMG_1234.md`.
+
+FrameLab stores the note folder path and note filename in its local project state, so reopening the app can reconnect each photo to its existing note. Notes include lightweight frontmatter for the source image and FrameLab photo ID, while the body remains normal Markdown text that can be edited in Obsidian.
 
 ## Requirements
 

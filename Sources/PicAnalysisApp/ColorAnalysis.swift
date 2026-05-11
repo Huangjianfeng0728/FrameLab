@@ -203,7 +203,11 @@ public enum ColorAnalyzer {
     }
 
     public static func lumaValue(for color: RGBColor) -> Double {
-        (0.2126 * Double(color.red) + 0.7152 * Double(color.green) + 0.0722 * Double(color.blue)) / 255
+        let linearLuma =
+            0.2126 * linearSRGBValue(color.red) +
+            0.7152 * linearSRGBValue(color.green) +
+            0.0722 * linearSRGBValue(color.blue)
+        return encodedSRGBValue(linearLuma)
     }
 
     public static func hex(from color: RGBColor) -> String {
@@ -212,6 +216,22 @@ public enum ColorAnalyzer {
 
     private static func bucketIndex(_ value: Double, bucketCount: Int) -> Int {
         min(bucketCount - 1, max(0, Int((value * Double(bucketCount)).rounded(.down))))
+    }
+
+    private static func linearSRGBValue(_ channel: UInt8) -> Double {
+        let encoded = Double(channel) / 255
+        if encoded <= 0.04045 {
+            return encoded / 12.92
+        }
+        return pow((encoded + 0.055) / 1.055, 2.4)
+    }
+
+    private static func encodedSRGBValue(_ linear: Double) -> Double {
+        let clamped = min(1, max(0, linear))
+        if clamped <= 0.0031308 {
+            return clamped * 12.92
+        }
+        return 1.055 * pow(clamped, 1 / 2.4) - 0.055
     }
 }
 

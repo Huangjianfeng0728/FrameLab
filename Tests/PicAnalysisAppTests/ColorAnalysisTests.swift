@@ -130,6 +130,42 @@ struct ColorAnalysisTests {
     }
 
     @Test
+    func histogramUsesGammaAwarePerceptualLumaForMiddleGray() {
+        let buffer = PixelBuffer(
+            width: 1,
+            height: 1,
+            pixels: [
+                RGBColor(red: 128, green: 128, blue: 128)
+            ]
+        )
+
+        let histogram = ColorAnalyzer.histogram(for: buffer, bucketCount: 256)
+        let lumaBucket = histogram.luma.firstIndex(of: 1)
+
+        #expect(lumaBucket == 128)
+    }
+
+    @Test
+    func histogramLumaOrdersPrimaryColorsByPerceivedBrightness() {
+        let buffer = PixelBuffer(
+            width: 3,
+            height: 1,
+            pixels: [
+                RGBColor(red: 255, green: 0, blue: 0),
+                RGBColor(red: 0, green: 255, blue: 0),
+                RGBColor(red: 0, green: 0, blue: 255)
+            ]
+        )
+
+        let histogram = ColorAnalyzer.histogram(for: buffer, bucketCount: 256)
+        let buckets = histogram.luma.enumerated().compactMap { index, count in
+            count > 0 ? index : nil
+        }
+
+        #expect(buckets == [76, 127, 220])
+    }
+
+    @Test
     func generatesTenDefaultPointsWithinBounds() {
         let pixels: [RGBColor] = (0..<100).map { value -> RGBColor in
             let channel = UInt8(value * 2)

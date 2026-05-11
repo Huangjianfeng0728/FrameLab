@@ -154,6 +154,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoNoteStore.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PicAnalysisApp.swift"
         },
         {
@@ -163,6 +167,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SecurityScopedResource.swift"
         },
         {
           "kind" : "file",
@@ -188,9 +196,11 @@
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoAnalysisDocument.swift.o",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoCanvasView.swift.o",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoListView.swift.o",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoNoteStore.swift.o",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swift.o",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/ProjectPersistence.swift.o",
-        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swift.o"
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swift.o",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SecurityScopedResource.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -276,6 +286,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoNoteStore.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swift.o"
         },
         {
@@ -285,6 +299,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SecurityScopedResource.swift.o"
         },
         {
           "kind" : "file",
@@ -304,9 +322,11 @@
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoAnalysisDocument.swift",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoCanvasView.swift",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoListView.swift",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoNoteStore.swift",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PicAnalysisApp.swift",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ProjectPersistence.swift",
-        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift"
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SecurityScopedResource.swift"
       ],
       "tempsPath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build",
       "wholeModuleOptimization" : false
@@ -330,6 +350,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/PhotoNoteStoreTests.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
         },
         {
@@ -347,7 +371,8 @@
       "objects" : [
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests.swift.o",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ColorAnalysisTests.swift.o",
-        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.swift.o"
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.swift.o",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/PhotoNoteStoreTests.swift.o"
       ],
       "otherArguments" : [
         "-target",
@@ -400,6 +425,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/PhotoNoteStoreTests.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/Modules/PicAnalysisAppTests.swiftmodule"
         }
       ],
@@ -407,7 +436,8 @@
       "sources" : [
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/AnalysisViewModelTests.swift",
         "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ColorAnalysisTests.swift",
-        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ImageLoaderTests.swift"
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ImageLoaderTests.swift",
+        "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/PhotoNoteStoreTests.swift"
       ],
       "tempsPath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build",
       "wholeModuleOptimization" : false
@@ -484,9 +514,11 @@
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoAnalysisDocument.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoCanvasView.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoListView.swift",
+      "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoNoteStore.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PicAnalysisApp.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/ProjectPersistence.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift",
+      "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SecurityScopedResource.swift",
       "-I",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -537,6 +569,7 @@
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/AnalysisViewModelTests.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ColorAnalysisTests.swift",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ImageLoaderTests.swift",
+      "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/PhotoNoteStoreTests.swift",
       "-I",
       "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/Modules",
       "-target",
@@ -675,6 +708,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoNoteStore.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swift.o"
         },
         {
@@ -684,6 +721,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SampleInspectorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SecurityScopedResource.swift.o"
         }
       ],
       "outputFilePath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/FrameLab.product/Objects.LinkFileList"
@@ -759,6 +800,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PhotoNoteStore.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/PicAnalysisApp.swift.o"
         },
         {
@@ -771,6 +816,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/SecurityScopedResource.swift.o"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/AnalysisViewModelTests.swift.o"
         },
         {
@@ -780,6 +829,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/ImageLoaderTests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/PhotoNoteStoreTests.swift.o"
         }
       ],
       "outputFilePath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/FrameLabPackageTests.product/Objects.LinkFileList"
@@ -837,6 +890,10 @@
         },
         {
           "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PhotoNoteStore.swift"
+        },
+        {
+          "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/PicAnalysisApp.swift"
         },
         {
@@ -846,6 +903,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SampleInspectorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Sources/PicAnalysisApp/SecurityScopedResource.swift"
         }
       ],
       "outputFilePath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisApp.build/sources"
@@ -868,6 +929,10 @@
         {
           "kind" : "file",
           "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/ImageLoaderTests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/Tests/PicAnalysisAppTests/PhotoNoteStoreTests.swift"
         }
       ],
       "outputFilePath" : "/Users/huangjianfeng/Documents/LLM-APPLICATION/pic-analysis/.build/arm64-apple-macosx/debug/PicAnalysisAppTests.build/sources"

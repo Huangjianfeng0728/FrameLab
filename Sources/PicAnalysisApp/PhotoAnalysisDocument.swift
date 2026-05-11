@@ -27,15 +27,33 @@ struct PhotoAnalysisDocument: Identifiable {
     let fileName: String
     let image: NSImage
     let pixelBuffer: PixelBuffer
+    var bookmarkData: Data?
+    var noteFolderPath: String?
+    var noteFolderBookmarkData: Data?
+    var noteFileName: String?
     var samplePoints: [SamplePoint]
     var histogram: ImageHistogram
 
-    init(id: UUID = UUID(), url: URL, image: NSImage, pixelBuffer: PixelBuffer, defaultRadius: SamplingRadius) {
+    init(
+        id: UUID = UUID(),
+        url: URL,
+        image: NSImage,
+        pixelBuffer: PixelBuffer,
+        defaultRadius: SamplingRadius,
+        bookmarkData: Data? = nil,
+        noteFolderPath: String? = nil,
+        noteFolderBookmarkData: Data? = nil,
+        noteFileName: String? = nil
+    ) {
         self.id = id
         self.url = url
         self.fileName = url.lastPathComponent
         self.image = image
         self.pixelBuffer = pixelBuffer
+        self.bookmarkData = bookmarkData
+        self.noteFolderPath = noteFolderPath
+        self.noteFolderBookmarkData = noteFolderBookmarkData
+        self.noteFileName = noteFileName
         self.histogram = ColorAnalyzer.histogram(for: pixelBuffer)
         self.samplePoints = DefaultPointGenerator.generatePoints(in: pixelBuffer, count: 10).map {
             SamplePoint(point: $0, radius: defaultRadius, buffer: pixelBuffer)
@@ -49,6 +67,8 @@ struct PhotoAnalysisDocument: Identifiable {
 
 @MainActor
 final class AnalysisViewModel: ObservableObject {
+    typealias ProjectLoader = (SamplingRadius) -> (documents: [PhotoAnalysisDocument], selectedPhotoID: UUID?)
+
     @Published var documents: [PhotoAnalysisDocument] = []
     @Published var selectedDocumentID: UUID?
     @Published var selectedPointID: UUID?
@@ -59,13 +79,18 @@ final class AnalysisViewModel: ObservableObject {
     @Published var importStatusText: String?
     @Published var isImmersiveMode = false
     @Published var showsImmersiveSamplePoints = true
+    @Published var selectedNoteBody = ""
+    @Published var noteStatusText: String?
+    @Published var isRestoringSavedProject = false
+    private var noteAutosaveWorkItem: DispatchWorkItem?
+    private var noteDrafts: [UUID: String] = [:]
 
-    init(loadSavedProject: Bool = true) {
+    init(
+        loadSavedProject: Bool = true,
+        projectLoader: @escaping ProjectLoader = ProjectPersistence.load(defaultRadius:)
+    ) {
         if loadSavedProject {
-            let restored = ProjectPersistence.load(defaultRadius: defaultRadius)
-            documents = restored.documents
-            selectedDocumentID = restored.selectedPhotoID ?? restored.documents.first?.id
-            selectedPointID = selectedDocument?.samplePoints.first?.id
+            restoreSavedProjectInBackground(projectLoader: projectLoader)
         }
     }
 
@@ -87,14 +112,15 @@ final class AnalysisViewModel: ObservableObject {
         return document.samplePoints.first { $0.id == selectedPointID }
     }
 
-    func importPhotos(from urls: [URL]) {
-        guard !urls.isEmpty, !isImporting else {
+    func importPhotos(from urls: [URL], noteFolderURL: URL? = nil) {
+        guard !urls.isEmpty, !isImporting, !isRestoringSavedProject else {
             return
         }
 
         isImporting = true
         importStatusText = "准备导入 \(urls.count) 张照片"
         let radius = defaultRadius
+        let noteFolderBookmarkData = noteFolderURL.flatMap { SecurityScopedResource.bookmarkData(for: $0) }
 
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             var failures: [String] = []
@@ -114,17 +140,29 @@ final class AnalysisViewModel: ObservableObject {
                             url: url,
                             image: imageData.image,
                             pixelBuffer: imageData.pixelBuffer,
-                            defaultRadius: radius
+                            defaultRadius: radius,
+                            bookmarkData: SecurityScopedResource.bookmarkData(for: url)
                         )
+                        var documentWithNote = document
+                        if let noteFolderURL {
+                            documentWithNote.noteFolderPath = noteFolderURL.path
+                            documentWithNote.noteFolderBookmarkData = noteFolderBookmarkData
+                            documentWithNote.noteFileName = try? PhotoNoteStore.noteFileName(
+                                forPhotoID: documentWithNote.id,
+                                sourceURL: url,
+                                in: noteFolderURL
+                            )
+                        }
 
                         DispatchQueue.main.async {
                             guard let self else {
                                 return
                             }
-                            self.documents.append(document)
+                            self.documents.append(documentWithNote)
                             if self.selectedDocumentID == nil {
-                                self.selectedDocumentID = document.id
-                                self.selectedPointID = document.samplePoints.first?.id
+                                self.selectedDocumentID = documentWithNote.id
+                                self.selectedPointID = documentWithNote.samplePoints.first?.id
+                                try? self.loadSelectedNote()
                             }
                             self.importStatusText = "已导入 \(index + 1)/\(urls.count)"
                         }
@@ -152,8 +190,10 @@ final class AnalysisViewModel: ObservableObject {
     }
 
     func select(document: PhotoAnalysisDocument) {
+        try? saveSelectedNoteImmediately()
         selectedDocumentID = document.id
         selectedPointID = document.samplePoints.first?.id
+        try? loadSelectedNote()
         saveProject()
     }
 
@@ -168,12 +208,14 @@ final class AnalysisViewModel: ObservableObject {
         guard let document = document(for: documentID) else {
             return
         }
+        try? saveSelectedNoteImmediately()
         selectedDocumentID = document.id
         if let pointID, document.samplePoints.contains(where: { $0.id == pointID }) {
             selectedPointID = pointID
         } else {
             selectedPointID = document.samplePoints.first?.id
         }
+        try? loadSelectedNote()
     }
 
     func selectNextPhoto() {
@@ -214,6 +256,150 @@ final class AnalysisViewModel: ObservableObject {
 
     func toggleImmersiveSamplePoints() {
         showsImmersiveSamplePoints.toggle()
+    }
+
+    func updateSelectedNoteBody(_ body: String) {
+        selectedNoteBody = body
+        noteStatusText = "未保存"
+    }
+
+    func updateSelectedNoteDraft(_ body: String) {
+        guard let selectedDocumentID else {
+            return
+        }
+        noteDrafts[selectedDocumentID] = body
+    }
+
+    func scheduleSelectedNoteAutosave() {
+        scheduleSelectedNoteAutosave(body: noteBodyForSaving())
+    }
+
+    func scheduleSelectedNoteAutosave(body: String) {
+        noteAutosaveWorkItem?.cancel()
+        guard let document = selectedDocument,
+              let noteFolderPath = document.noteFolderPath,
+              let noteFileName = document.noteFileName else {
+            return
+        }
+
+        let noteFolderBookmarkData = document.noteFolderBookmarkData
+        let documentID = document.id
+        let sourceURL = document.url
+        let workItem = DispatchWorkItem { [weak self] in
+            Task { @MainActor in
+                let resolvedFolder = SecurityScopedResource.resolve(
+                    bookmarkData: noteFolderBookmarkData,
+                    fallbackPath: noteFolderPath,
+                    isDirectory: true
+                )
+                defer {
+                    resolvedFolder.stopAccessing()
+                }
+                try? PhotoNoteStore.saveNote(
+                    body: body,
+                    photoID: documentID,
+                    sourceURL: sourceURL,
+                    folderURL: resolvedFolder.url,
+                    fileName: noteFileName
+                )
+                self?.noteDrafts[documentID] = body
+            }
+        }
+        noteAutosaveWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: workItem)
+    }
+
+    func loadSelectedNote() throws {
+        noteAutosaveWorkItem?.cancel()
+        guard let document = selectedDocument,
+              let noteFolderPath = document.noteFolderPath,
+              let noteFileName = document.noteFileName else {
+            selectedNoteBody = ""
+            noteStatusText = selectedDocument == nil ? nil : "未绑定 Obsidian 文件夹"
+            return
+        }
+
+        let resolvedFolder = SecurityScopedResource.resolve(
+            bookmarkData: document.noteFolderBookmarkData,
+            fallbackPath: noteFolderPath,
+            isDirectory: true
+        )
+        defer {
+            resolvedFolder.stopAccessing()
+        }
+        let noteURL = resolvedFolder.url.appendingPathComponent(noteFileName)
+        if FileManager.default.fileExists(atPath: noteURL.path) {
+            selectedNoteBody = try PhotoNoteStore.loadBody(from: noteURL)
+            noteDrafts[document.id] = nil
+            noteStatusText = "已加载 \(noteFileName)"
+        } else {
+            selectedNoteBody = ""
+            noteDrafts[document.id] = nil
+            noteStatusText = "将创建 \(noteFileName)"
+        }
+    }
+
+    func saveSelectedNoteImmediately() throws {
+        noteAutosaveWorkItem?.cancel()
+        try saveSelectedNote(updateStatus: true)
+    }
+
+    func saveSelectedNoteSilentlyForAutosave() throws {
+        try saveSelectedNote(updateStatus: false)
+    }
+
+    private func saveSelectedNote(updateStatus: Bool) throws {
+        guard let document = selectedDocument,
+              let noteFolderPath = document.noteFolderPath,
+              let noteFileName = document.noteFileName else {
+            return
+        }
+
+        let resolvedFolder = SecurityScopedResource.resolve(
+            bookmarkData: document.noteFolderBookmarkData,
+            fallbackPath: noteFolderPath,
+            isDirectory: true
+        )
+        defer {
+            resolvedFolder.stopAccessing()
+        }
+        try PhotoNoteStore.saveNote(
+            body: noteBodyForSaving(),
+            photoID: document.id,
+            sourceURL: document.url,
+            folderURL: resolvedFolder.url,
+            fileName: noteFileName
+        )
+        if let selectedDocumentID {
+            noteDrafts[selectedDocumentID] = nil
+        }
+        if updateStatus {
+            noteStatusText = "已保存 \(noteFileName)"
+        }
+    }
+
+    private func noteBodyForSaving() -> String {
+        guard let selectedDocumentID else {
+            return selectedNoteBody
+        }
+        return noteDrafts[selectedDocumentID] ?? selectedNoteBody
+    }
+
+    func bindSelectedDocumentToNoteFolder(_ folderURL: URL) throws {
+        guard let documentIndex = selectedDocumentIndex else {
+            return
+        }
+        let document = documents[documentIndex]
+        let noteFileName = try PhotoNoteStore.noteFileName(
+            forPhotoID: document.id,
+            sourceURL: document.url,
+            in: folderURL
+        )
+        documents[documentIndex].noteFolderPath = folderURL.path
+        documents[documentIndex].noteFolderBookmarkData = SecurityScopedResource.bookmarkData(for: folderURL)
+        documents[documentIndex].noteFileName = noteFileName
+        saveProject()
+        try loadSelectedNote()
     }
 
     func addPoint(_ point: NormalizedPoint) {
@@ -277,7 +463,44 @@ final class AnalysisViewModel: ObservableObject {
         saveProject()
     }
 
+    func persistCurrentWorkspace() {
+        guard !isRestoringSavedProject else {
+            return
+        }
+        noteAutosaveWorkItem?.cancel()
+        try? saveSelectedNote(updateStatus: false)
+        saveProject()
+    }
+
+    private func restoreSavedProjectInBackground(projectLoader: @escaping ProjectLoader) {
+        isRestoringSavedProject = true
+        let radius = defaultRadius
+
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            let restored = projectLoader(radius)
+
+            DispatchQueue.main.async {
+                guard let self else {
+                    return
+                }
+                self.documents = restored.documents
+                if let selectedPhotoID = restored.selectedPhotoID,
+                   restored.documents.contains(where: { $0.id == selectedPhotoID }) {
+                    self.selectedDocumentID = selectedPhotoID
+                } else {
+                    self.selectedDocumentID = restored.documents.first?.id
+                }
+                self.selectedPointID = self.selectedDocument?.samplePoints.first?.id
+                try? self.loadSelectedNote()
+                self.isRestoringSavedProject = false
+            }
+        }
+    }
+
     private func saveProject() {
+        guard !isRestoringSavedProject else {
+            return
+        }
         ProjectPersistence.save(documents: documents, selectedPhotoID: selectedDocumentID)
     }
 }
