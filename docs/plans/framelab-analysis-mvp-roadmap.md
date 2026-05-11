@@ -1,6 +1,6 @@
 # FrameLab Analysis MVP Roadmap
 
-This file is the long-running execution tracker for expanding FrameLab from color/tone inspection into a broader photo learning toolbox. Keep this file updated as tasks land. Each completed task must record implementation notes, verification, and any remaining follow-up.
+This file is the long-running task tracker for expanding FrameLab from color/tone inspection into a broader photo learning toolbox. Keep this file compact and update task status as work lands. Detailed execution history lives in `docs/plans/framelab-analysis-mvp-execution-log.md`.
 
 ## Execution Rules
 
@@ -11,7 +11,7 @@ This file is the long-running execution tracker for expanding FrameLab from colo
 - Prefer local deterministic image algorithms. Do not introduce Core ML, cloud AI, or network services for this MVP.
 - Run `swift test` after each milestone.
 - Run `./scripts/package_app.sh` for UI, export, or packaging-impacting changes.
-- Record each finished step in `Execution Log` with date, files changed, commands run, and result.
+- Record each finished step in `docs/plans/framelab-analysis-mvp-execution-log.md` with date, files changed, commands run, and result.
 
 ## Status Legend
 
@@ -42,11 +42,6 @@ This file is the long-running execution tracker for expanding FrameLab from colo
   - Tests: Cover pure black, near-black, and detailed dark pixels.
   - Verification: `swift test`
   - Landing notes: Implemented alongside highlight clipping in a single full-image pass for efficiency.
-  - Goal: Identify pixels that are near-black and likely have no recoverable visible detail.
-  - Implementation notes: Reuse the exposure analysis pass where practical to avoid extra full-image scans.
-  - Tests: Cover pure black, near-black, and detailed dark pixels.
-  - Verification: `swift test`
-  - Landing notes:
 
 - [x] Show exposure diagnostics in the main analysis UI
   - Goal: Display shadow/midtone/highlight ratios plus clipped highlight and crushed shadow percentages near the histogram.
@@ -190,54 +185,4 @@ This file is the long-running execution tracker for expanding FrameLab from colo
 
 ## Execution Log
 
-Use this format for each execution entry:
-
-```md
-### YYYY-MM-DD - Short summary
-
-- Status:
-- Files changed:
-- Commands run:
-- Result:
-- Follow-up:
-```
-
-### 2026-05-11 - Highlight and shadow warning overlays implemented
-
-- Status: Completed image overlays for highlight clipping and crushed shadow warnings.
-- Files changed: `Sources/PicAnalysisApp/PhotoAnalysisDocument.swift`, `Sources/PicAnalysisApp/ColorAnalysis.swift`, `Sources/PicAnalysisApp/PhotoCanvasView.swift`, `Sources/PicAnalysisApp/ContentView.swift`, `docs/plans/framelab-analysis-mvp-roadmap.md`
-- Commands run: `swift build`, `swift test`
-- Result: Build and all 34 tests pass. Added overlay toggle state properties to view model. Created `ClippedHighlightOverlay` and `CrushedShadowOverlay` SwiftUI Canvas views. Added toolbar toggle buttons with color tinting for active state. Overlays render between the image and sample points to preserve dragging interaction.
-- Follow-up: Milestone 1 complete. Next task: Add a selectable local analysis region.
-
-### 2026-05-11 - Exposure diagnostics UI implemented
-
-- Status: Completed exposure diagnostics panel in main UI.
-- Files changed: `Sources/PicAnalysisApp/PhotoAnalysisDocument.swift`, `Sources/PicAnalysisApp/HistogramPanel.swift`, `Sources/PicAnalysisApp/ContentView.swift`, `Sources/PicAnalysisApp/ExportAnalysisView.swift`, `docs/plans/framelab-analysis-mvp-roadmap.md`
-- Commands run: `swift build`, `swift test`
-- Result: Build and all 34 tests pass. Added `exposureAnalysis` property to `PhotoAnalysisDocument`. Created `ExposureAnalysisPanel` with horizontal bar charts for shadow/midtone/highlight. Clipped highlights (red) and crushed shadows (orange) show only when > 1%. Updated both main UI and export view.
-- Follow-up: Next task: Add image overlays for highlight and shadow warnings.
-
-### 2026-05-11 - Highlight clipping and crushed shadow detection implemented
-
-- Status: Completed highlight clipping and crushed shadow detection with tests.
-- Files changed: `Sources/PicAnalysisApp/ColorAnalysis.swift`, `Tests/PicAnalysisAppTests/ColorAnalysisTests.swift`, `docs/plans/framelab-analysis-mvp-roadmap.md`
-- Commands run: `swift test`
-- Result: All 34 tests pass. Added `clippedHighlightPercentage` and `crushedShadowPercentage` to `ExposureAnalysis`, along with `ExposureThresholds` enum for thresholds. Implemented in a single full-image pass for efficiency.
-- Follow-up: Next task: Show exposure diagnostics in the main analysis UI.
-
-### 2026-05-11 - Exposure analysis model implemented
-
-- Status: Completed the exposure analysis model with tests.
-- Files changed: `Sources/PicAnalysisApp/ColorAnalysis.swift`, `Tests/PicAnalysisAppTests/ColorAnalysisTests.swift`, `docs/plans/framelab-analysis-mvp-roadmap.md`
-- Commands run: `swift test`
-- Result: All 28 tests pass. Added `ExposureAnalysis` struct with shadow, midtone, highlight percentages, and `exposureAnalysis(for:)` method.
-- Follow-up: Next task: Add highlight clipping detection.
-
-### 2026-05-11 - Roadmap file created
-
-- Status: Created the MVP roadmap and execution tracker.
-- Files changed: `docs/plans/framelab-analysis-mvp-roadmap.md`
-- Commands run: Not applicable; documentation tracker only.
-- Result: Ready for long-running Codex execution.
-- Follow-up: Start with Milestone 1 exposure analysis model.
+Detailed execution history has been split into `docs/plans/framelab-analysis-mvp-execution-log.md` to keep this roadmap lightweight. Append new log entries there, not in this file.

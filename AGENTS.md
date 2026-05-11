@@ -26,7 +26,7 @@ Existing commit messages are short and direct, such as `add README.md`, `v1Êèê‰∫
 
 ## Long-Running Plan & Todo Source
 
-For extended Codex execution, use `docs/plans/framelab-analysis-mvp-roadmap.md` as the source of truth for the active plan, TODO list, milestone order, acceptance checklist, and landing log. Before starting work, read that file and pick the next incomplete task. While working, update task status (`[ ]`, `[~]`, `[x]`, `[!]`) and fill in `Landing notes`. After each completed step, append an `Execution Log` entry with files changed, commands run, results, and follow-up.
+For extended Codex execution, use `docs/plans/framelab-analysis-mvp-roadmap.md` as the source of truth for the active plan, TODO list, milestone order, and acceptance checklist. Use `docs/plans/framelab-analysis-mvp-execution-log.md` for detailed landing history. Before starting work, read the roadmap and pick the next incomplete task. While working, update task status (`[ ]`, `[~]`, `[x]`, `[!]`) and fill in `Landing notes` in the roadmap. After each completed step, append an execution log entry to the separate log file with files changed, commands run, results, and follow-up.
 
 ## Agent-Specific Instructions
 
