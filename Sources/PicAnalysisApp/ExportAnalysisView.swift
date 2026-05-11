@@ -19,8 +19,11 @@ struct ExportAnalysisView: View {
                 .background(Color(nsColor: .controlBackgroundColor))
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }
-            HistogramPanel(histogram: document.histogram)
-                .frame(height: 220)
+            HistogramPanel(
+                histogram: document.histogram,
+                exposureAnalysis: document.exposureAnalysis
+            )
+            .frame(height: 220)
         }
         .padding(42)
         .background(Color(nsColor: .textBackgroundColor))

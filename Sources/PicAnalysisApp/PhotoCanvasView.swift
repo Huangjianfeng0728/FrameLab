@@ -18,6 +18,18 @@ struct PhotoCanvasView: View {
                             .scaledToFit()
                             .frame(width: proxy.size.width, height: proxy.size.height)
 
+                        if viewModel.showsClippedHighlightOverlay {
+                            ClippedHighlightOverlay(buffer: document.pixelBuffer)
+                                .frame(width: imageRect.width, height: imageRect.height)
+                                .position(x: imageRect.midX, y: imageRect.midY)
+                        }
+
+                        if viewModel.showsCrushedShadowOverlay {
+                            CrushedShadowOverlay(buffer: document.pixelBuffer)
+                                .frame(width: imageRect.width, height: imageRect.height)
+                                .position(x: imageRect.midX, y: imageRect.midY)
+                        }
+
                         if showsSamplePoints {
                             ForEach(Array(document.samplePoints.enumerated()), id: \.element.id) { index, samplePoint in
                                 SampleMarkerView(
@@ -282,5 +294,61 @@ private struct PixelGridView: View {
             green: Double(pixel.green) / 255,
             blue: Double(pixel.blue) / 255
         )
+    }
+}
+
+struct ClippedHighlightOverlay: View {
+    let buffer: PixelBuffer
+
+    var body: some View {
+        Canvas { context, size in
+            let scaleX = size.width / CGFloat(buffer.width)
+            let scaleY = size.height / CGFloat(buffer.height)
+
+            for y in 0..<buffer.height {
+                for x in 0..<buffer.width {
+                    let pixel = buffer.pixel(x: x, y: y)
+                    let luma = ColorAnalyzer.lumaValue(for: pixel)
+
+                    if luma >= ExposureThresholds.clippedHighlight {
+                        let rect = CGRect(
+                            x: CGFloat(x) * scaleX,
+                            y: CGFloat(y) * scaleY,
+                            width: scaleX,
+                            height: scaleY
+                        )
+                        context.fill(Path(rect), with: .color(.red.opacity(0.45)))
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct CrushedShadowOverlay: View {
+    let buffer: PixelBuffer
+
+    var body: some View {
+        Canvas { context, size in
+            let scaleX = size.width / CGFloat(buffer.width)
+            let scaleY = size.height / CGFloat(buffer.height)
+
+            for y in 0..<buffer.height {
+                for x in 0..<buffer.width {
+                    let pixel = buffer.pixel(x: x, y: y)
+                    let luma = ColorAnalyzer.lumaValue(for: pixel)
+
+                    if luma <= ExposureThresholds.crushedShadow {
+                        let rect = CGRect(
+                            x: CGFloat(x) * scaleX,
+                            y: CGFloat(y) * scaleY,
+                            width: scaleX,
+                            height: scaleY
+                        )
+                        context.fill(Path(rect), with: .color(.orange.opacity(0.55)))
+                    }
+                }
+            }
+        }
     }
 }

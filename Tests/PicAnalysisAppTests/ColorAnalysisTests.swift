@@ -181,4 +181,145 @@ struct ColorAnalysisTests {
         #expect(points.count == 10)
         #expect(allPointsAreInsideImage)
     }
+
+    @Test
+    func exposureAnalysisReportsFullDarkImageAsShadow() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 0, green: 0, blue: 0), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.shadowPercentage - 1.0) < 0.0001)
+        #expect(abs(analysis.midtonePercentage - 0.0) < 0.0001)
+        #expect(abs(analysis.highlightPercentage - 0.0) < 0.0001)
+    }
+
+    @Test
+    func exposureAnalysisReportsMiddleGrayAsMidtone() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 128, green: 128, blue: 128), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.shadowPercentage - 0.0) < 0.0001)
+        #expect(abs(analysis.midtonePercentage - 1.0) < 0.0001)
+        #expect(abs(analysis.highlightPercentage - 0.0) < 0.0001)
+    }
+
+    @Test
+    func exposureAnalysisReportsFullBrightImageAsHighlight() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 255, green: 255, blue: 255), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.shadowPercentage - 0.0) < 0.0001)
+        #expect(abs(analysis.midtonePercentage - 0.0) < 0.0001)
+        #expect(abs(analysis.highlightPercentage - 1.0) < 0.0001)
+    }
+
+    @Test
+    func exposureAnalysisReportsEqualPercentagesForMixedBuffer() {
+        let pixels = [
+            RGBColor(red: 0, green: 0, blue: 0),
+            RGBColor(red: 128, green: 128, blue: 128),
+            RGBColor(red: 255, green: 255, blue: 255)
+        ]
+        let buffer = PixelBuffer(width: 3, height: 1, pixels: pixels)
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.shadowPercentage - 1/3) < 0.0001)
+        #expect(abs(analysis.midtonePercentage - 1/3) < 0.0001)
+        #expect(abs(analysis.highlightPercentage - 1/3) < 0.0001)
+    }
+
+    @Test
+    func clippedHighlightDetectionIdentifiesPureWhite() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 255, green: 255, blue: 255), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.clippedHighlightPercentage - 1.0) < 0.0001)
+    }
+
+    @Test
+    func clippedHighlightDetectionIdentifiesNearWhite() {
+        let pixels = [
+            RGBColor(red: 250, green: 250, blue: 250),
+            RGBColor(red: 240, green: 240, blue: 240)
+        ]
+        let buffer = PixelBuffer(width: 2, height: 1, pixels: pixels)
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(analysis.clippedHighlightPercentage > 0)
+        #expect(analysis.clippedHighlightPercentage < 1.0)
+    }
+
+    @Test
+    func clippedHighlightDetectionIgnoresMidtonePixels() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 128, green: 128, blue: 128), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.clippedHighlightPercentage - 0.0) < 0.0001)
+    }
+
+    @Test
+    func crushedShadowDetectionIdentifiesPureBlack() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 0, green: 0, blue: 0), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.crushedShadowPercentage - 1.0) < 0.0001)
+    }
+
+    @Test
+    func crushedShadowDetectionIdentifiesNearBlack() {
+        let pixels = [
+            RGBColor(red: 5, green: 5, blue: 5),
+            RGBColor(red: 15, green: 15, blue: 15)
+        ]
+        let buffer = PixelBuffer(width: 2, height: 1, pixels: pixels)
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(analysis.crushedShadowPercentage > 0)
+        #expect(analysis.crushedShadowPercentage < 1.0)
+    }
+
+    @Test
+    func crushedShadowDetectionIgnoresMidtonePixels() {
+        let buffer = PixelBuffer(
+            width: 10,
+            height: 10,
+            pixels: Array(repeating: RGBColor(red: 128, green: 128, blue: 128), count: 100)
+        )
+
+        let analysis = ColorAnalyzer.exposureAnalysis(for: buffer)
+
+        #expect(abs(analysis.crushedShadowPercentage - 0.0) < 0.0001)
+    }
 }

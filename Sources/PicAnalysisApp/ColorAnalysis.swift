@@ -104,6 +104,40 @@ public struct ImageHistogram: Equatable, Sendable {
     public let blue: [Int]
 }
 
+public struct ExposureAnalysis: Equatable, Sendable {
+    public let shadowPercentage: Double
+    public let midtonePercentage: Double
+    public let highlightPercentage: Double
+    public let clippedHighlightPercentage: Double
+    public let crushedShadowPercentage: Double
+
+    public init(
+        shadowPercentage: Double,
+        midtonePercentage: Double,
+        highlightPercentage: Double,
+        clippedHighlightPercentage: Double = 0,
+        crushedShadowPercentage: Double = 0
+    ) {
+        self.shadowPercentage = shadowPercentage
+        self.midtonePercentage = midtonePercentage
+        self.highlightPercentage = highlightPercentage
+        self.clippedHighlightPercentage = clippedHighlightPercentage
+        self.crushedShadowPercentage = crushedShadowPercentage
+    }
+}
+
+public enum ExposureThresholds {
+    public static let shadow = 0.25
+    public static let highlight = 0.75
+    public static let clippedHighlight = 0.92
+    public static let crushedShadow = 0.12
+}
+
+public enum OverlayType {
+    case clippedHighlight
+    case crushedShadow
+}
+
 public enum ColorAnalyzer {
     public static func hsl(from color: RGBColor) -> HSLColor {
         let red = Double(color.red) / 255
@@ -200,6 +234,40 @@ public enum ColorAnalyzer {
         }
 
         return ImageHistogram(luma: luma, red: red, green: green, blue: blue)
+    }
+
+    public static func exposureAnalysis(for buffer: PixelBuffer) -> ExposureAnalysis {
+        var shadowCount = 0
+        var midtoneCount = 0
+        var highlightCount = 0
+        var clippedHighlightCount = 0
+        var crushedShadowCount = 0
+
+        for pixel in buffer.pixels {
+            let luma = lumaValue(for: pixel)
+            if luma < ExposureThresholds.crushedShadow {
+                crushedShadowCount += 1
+            }
+            if luma >= ExposureThresholds.clippedHighlight {
+                clippedHighlightCount += 1
+            }
+            if luma < ExposureThresholds.shadow {
+                shadowCount += 1
+            } else if luma >= ExposureThresholds.highlight {
+                highlightCount += 1
+            } else {
+                midtoneCount += 1
+            }
+        }
+
+        let total = max(1, buffer.pixels.count)
+        return ExposureAnalysis(
+            shadowPercentage: Double(shadowCount) / Double(total),
+            midtonePercentage: Double(midtoneCount) / Double(total),
+            highlightPercentage: Double(highlightCount) / Double(total),
+            clippedHighlightPercentage: Double(clippedHighlightCount) / Double(total),
+            crushedShadowPercentage: Double(crushedShadowCount) / Double(total)
+        )
     }
 
     public static func lumaValue(for color: RGBColor) -> Double {

@@ -33,6 +33,7 @@ struct PhotoAnalysisDocument: Identifiable {
     var noteFileName: String?
     var samplePoints: [SamplePoint]
     var histogram: ImageHistogram
+    var exposureAnalysis: ExposureAnalysis
 
     init(
         id: UUID = UUID(),
@@ -55,6 +56,7 @@ struct PhotoAnalysisDocument: Identifiable {
         self.noteFolderBookmarkData = noteFolderBookmarkData
         self.noteFileName = noteFileName
         self.histogram = ColorAnalyzer.histogram(for: pixelBuffer)
+        self.exposureAnalysis = ColorAnalyzer.exposureAnalysis(for: pixelBuffer)
         self.samplePoints = DefaultPointGenerator.generatePoints(in: pixelBuffer, count: 10).map {
             SamplePoint(point: $0, radius: defaultRadius, buffer: pixelBuffer)
         }
@@ -79,6 +81,8 @@ final class AnalysisViewModel: ObservableObject {
     @Published var importStatusText: String?
     @Published var isImmersiveMode = false
     @Published var showsImmersiveSamplePoints = true
+    @Published var showsClippedHighlightOverlay = false
+    @Published var showsCrushedShadowOverlay = false
     @Published var selectedNoteBody = ""
     @Published var noteStatusText: String?
     @Published var isRestoringSavedProject = false

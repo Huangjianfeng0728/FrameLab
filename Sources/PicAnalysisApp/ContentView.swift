@@ -96,6 +96,28 @@ struct ContentView: View {
                     Label("沉浸看图", systemImage: "rectangle.expand.vertical")
                 }
                 .disabled(viewModel.selectedDocument == nil)
+
+                Button {
+                    viewModel.showsClippedHighlightOverlay.toggle()
+                } label: {
+                    Label(
+                        viewModel.showsClippedHighlightOverlay ? "隐藏高光裁剪" : "显示高光裁剪",
+                        systemImage: "sun.max"
+                    )
+                }
+                .disabled(viewModel.selectedDocument == nil)
+                .tint(viewModel.showsClippedHighlightOverlay ? .red : nil)
+
+                Button {
+                    viewModel.showsCrushedShadowOverlay.toggle()
+                } label: {
+                    Label(
+                        viewModel.showsCrushedShadowOverlay ? "隐藏阴影挤压" : "显示阴影挤压",
+                        systemImage: "moon.stars"
+                    )
+                }
+                .disabled(viewModel.selectedDocument == nil)
+                .tint(viewModel.showsCrushedShadowOverlay ? .orange : nil)
             }
             .frame(minWidth: 320, alignment: .leading)
             .layoutPriority(2)
@@ -279,7 +301,10 @@ struct ContentView: View {
             HStack(spacing: 12) {
                 Group {
                     if let document = viewModel.selectedDocument {
-                        HistogramPanel(histogram: document.histogram)
+                        HistogramPanel(
+                            histogram: document.histogram,
+                            exposureAnalysis: document.exposureAnalysis
+                        )
                     } else {
                         Text("导入照片后会在这里显示亮度和 RGB 直方图")
                             .foregroundStyle(.secondary)
